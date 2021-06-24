@@ -9,7 +9,7 @@ jobs:
     steps:
     - name: Get Datetime
       id: date
-      run: echo "::set-output name=date::$(date +'%Y-%m-%d %H:%i:%s')"
+      run: echo "::set-output name=datetime::$(datetime +'%Y-%m-%d %H:%i:%s')"
     - name: Check Out Repo 
       uses: actions/checkout@v2
         
