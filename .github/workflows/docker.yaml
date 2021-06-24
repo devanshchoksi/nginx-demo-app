@@ -7,6 +7,9 @@ jobs:
     name: Docker Build and Push
     runs-on: ubuntu-latest
     steps:
+    - name: Get Datetime
+      id: date
+      run: echo "::set-output name=date::$(date +'%Y-%m-%d %H:%i:%s')"
     - name: Check Out Repo 
       uses: actions/checkout@v2
         
@@ -22,4 +25,4 @@ jobs:
         context: ./
         file: ./Dockerfile
         push: true
-        tags: ${{ secrets.DOCKER_HUB_USERNAME }}/website:latest
+        tags: ${{ secrets.DOCKER_HUB_USERNAME }}/website:${{ steps.date.outputs.date }}
