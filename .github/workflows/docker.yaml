@@ -12,6 +12,6 @@ jobs:
     - run: pwd
     - run: ls
     - name: docker login
-      run: docker login ${{ secrets.DOCKER_HUB_USERNAME }} ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+      run: docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} -p ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
     
 
