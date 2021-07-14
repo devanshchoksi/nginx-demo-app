@@ -7,6 +7,7 @@ jobs:
     name: Docker Build and Push
     runs-on: ubuntu-latest
     steps:
-    - run: docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/website:v3.0 .
+    - run: pwd
+    - run: ls
     
 
