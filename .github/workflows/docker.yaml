@@ -22,6 +22,6 @@ jobs:
         push: true
         tags: |
           ${{ secrets.DOCKER_HUB_USERNAME }}/website:latest
-          ${{ secrets.DOCKER_HUB_USERNAME }}/website:${{ GITHUB_REF }}
+          ${{ secrets.DOCKER_HUB_USERNAME }}/website:v3.0
     
 
