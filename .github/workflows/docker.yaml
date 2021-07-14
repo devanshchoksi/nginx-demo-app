@@ -22,7 +22,7 @@ jobs:
         image: ${{ secrets.DOCKER_HUB_USERNAME }}/website
         registry: docker.io
         dockerfile: Dockerfile
-        tags: latest,${{ env.GIT_COMMIT }}
+        tags: latest
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
 
