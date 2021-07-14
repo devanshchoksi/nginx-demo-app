@@ -2,6 +2,8 @@ name: building and pushing image
 
 on: push
 
+env:
+  GIT_REF=${{ steps.git.outputs }}
 jobs:
   my-job:
     name: Docker Build and Push
@@ -11,7 +13,9 @@ jobs:
       uses: actions/checkout@master
     - name: Output Git
       id: git
-      run: GIT_REF=$(/usr/bin/git log -1 --format='%H')
+      run: |
+        echo $(/usr/bin/git rev-parse HEAD)
+        echo ${{ GIT_REF }}
     - name: Login to Docker Hub
       uses: docker/login-action@v1
       with:
@@ -25,6 +29,6 @@ jobs:
         push: true
         tags: |
           ${{ secrets.DOCKER_HUB_USERNAME }}/website:latest
-          ${{ secrets.DOCKER_HUB_USERNAME }}/website:${{ GIT_REF }}
+          ${{ secrets.DOCKER_HUB_USERNAME }}/website:v4.0
     
 
