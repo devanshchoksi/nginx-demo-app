@@ -7,22 +7,6 @@ jobs:
     name: Docker Build and Push
     runs-on: ubuntu-latest
     steps:
-    - name: Git
-      id: git
-      run: echo "git log -1 --format=%h"
-
-    - name: Check Out Repo 
-      uses: actions/checkout@v2
-
-    - name: Docker Build and Push
-      uses: mr-smithers-excellent/docker-build-push@v5
-      env:
-        GIT_COMMIT: ${{ steps.git.outputs.git }}
-      with:
-        image: ${{ secrets.DOCKER_HUB_USERNAME }}/website
-        registry: docker.io
-        dockerfile: Dockerfile
-        tags: latest
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
+    - run: docker build -t abc/xyz:latest .
+    
 
