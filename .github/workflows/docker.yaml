@@ -25,6 +25,6 @@ jobs:
         push: true
         tags: |
           ${{ secrets.DOCKER_HUB_USERNAME }}/website:latest
-          ${{ secrets.DOCKER_HUB_USERNAME }}/website:$(/usr/bin/git log -1 --format='%H')
+          ${{ secrets.DOCKER_HUB_USERNAME }}/website:${{ steps.git.outputs.git }}
     
 
