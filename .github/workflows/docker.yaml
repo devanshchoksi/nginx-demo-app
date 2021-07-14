@@ -7,22 +7,28 @@ jobs:
     name: Docker Build and Push
     runs-on: ubuntu-latest
     steps:
-    - name: Get Datetime
-      id: date
-      run: echo "::set-output name=date::$(date +'%Y-%m-%d_%H-%M-%S')"
+    - name: Git
+      id: git
+      run: echo "git log -1 --format=%h"
+
     - name: Check Out Repo 
       uses: actions/checkout@v2
         
-    - name: Login to Docker Hub
+    """- name: Login to Docker Hub
       uses: docker/login-action@v1
       with:
         username: ${{ secrets.DOCKER_HUB_USERNAME }}
-        password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+        password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}"""
 
     - name: Docker Build and Push
-      uses: docker/build-push-action@v2
+      uses: mr-smithers-excellent/docker-build-push@v5
+      env:
+        GIT_COMMIT: ${{ steps.git.outputs.git }}
       with:
-        context: ./
-        file: ./Dockerfile
-        push: true
-        tags: ${{ secrets.DOCKER_HUB_USERNAME }}/website:${{ steps.date.outputs.date }}
+        image: ${{ secrets.DOCKER_HUB_USERNAME }}/website
+        registry: docker.io
+        dockerfile: Dockerfile
+        tags: latest,${{ env.GIT_COMMIT }}
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+
