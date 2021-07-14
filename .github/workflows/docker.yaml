@@ -7,6 +7,8 @@ jobs:
     name: Docker Build and Push
     runs-on: ubuntu-latest
     steps:
+    - name: Checking out our code
+      uses: actions/checkout@master
     - run: pwd
     - run: ls
     
